@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- The core configuration file for the framework is the default (struts.xml) file
+and should reside on the classpath of the webapp (generally /WEB-INF/classes). -->
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+
+    <!-- devMode equals debug information and reload everything for every request -->
+    <constant name="struts.devMode" value="true"/>
+    <constant name="struts.ui.theme" value="simple"/>
+
+    <package name="webLogic" extends="struts-default">
+
+        <default-action-ref name="index"/>
+
+        <global-results>
+            <result name="error">/error.jsp</result>
+        </global-results>
+
+        <!-- all exceptions not caught by the application will lead to error.jsp -->
+        <global-exception-mappings>
+            <exception-mapping exception="java.lang.Exception" result="error"/>
+        </global-exception-mappings>
+
+        <!-- 'index' action leads to the view provided by adminPanel.jsp -->
+        <action name="index">
+            <result>/index.jsp</result>
+        </action>
+        <action name="goToRegister">
+            <result>/register.jsp</result>
+        </action>
+        <action name="goToCreateElection">
+            <result>/createElection.jsp</result>
+        </action>
+        <action name="redirectUserList">
+            <result>/UserList.jsp</result>
+        </action>
+        <action name="redirectElectionList">
+            <result>/ElectionList.jsp</result>
+        </action>
+        <action name="login" class="webLogic.action.LoginAction" method="execute">
+            <result name="admin">/adminPanel.jsp</result>
+            <result name="user">/voter.jsp</result>
+            <result name="failure">/failure.jsp</result>
+        </action>
+        <action name="register" class="webLogic.action.RegisterAction" method="execute">
+            <result name="success">/adminPanel.jsp</result>
+            <result name="failure">/failure.jsp</result>
+        </action>
+        <action name="createElection" class="webLogic.action.createElectionAction" method="execute">
+            <result name="success">/adminPanel.jsp</result>
+            <result name="failure">/failure.jsp</result>
+        </action>
+        <action name="showUserList" class="webLogic.action.getUserListAction" method="execute">
+            <result name="success">/displayUserList.jsp</result>
+            <result name="Error">/error.jsp</result>
+        </action>
+        <action name="showElectionList" class="webLogic.action.getElectionListAction" method="execute">
+            <result name="success">/displayElectionList.jsp</result>
+            <result name="Error">/error.jsp</result>
+        </action>
+    </package>
+
+</struts>
