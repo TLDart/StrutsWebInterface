@@ -8,8 +8,8 @@
 <body>
 <h1>Please Login to Continue</h1>
 <s:form action="login" method="post">
-    <s:text  name="Name:"  />
-    <s:textfield name="username"/><br>
+    <s:text  name="CC :"  />
+    <s:textfield name="ccs"/><br>
     <s:text name="Password:"  />
     <s:textfield name="password" /><br>
     <s:submit  cssClass="waves-effect waves-light btn-large"/>

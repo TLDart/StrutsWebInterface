@@ -51,6 +51,8 @@ public class createElectionAction extends ActionSupport implements SessionAware 
                 return "failure";
             }
             CopyOnWriteArrayList<VotingListInfo> validDeps = new CopyOnWriteArrayList<>();
+            validDeps.add(new VotingListInfo("WEB"));
+
 
 
             this.getHeyBean().createElection(stTime, endTime, description, title, department, type, validDeps);

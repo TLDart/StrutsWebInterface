@@ -59,7 +59,7 @@ and should reside on the classpath of the webapp (generally /WEB-INF/classes). -
         </action>
         <action name="login" class="webLogic.action.LoginAction" method="execute">
             <result name="admin">/adminPanel.jsp</result>
-            <result name="user">/voter.jsp</result>
+            <result name="user">/postLogin.jsp</result>
             <result name="failure">/failure.jsp</result>
         </action>
         <action name="register" class="webLogic.action.RegisterAction" method="execute">

@@ -10,26 +10,31 @@ import webLogic.model.HeyBean;
 
 public class LoginAction extends ActionSupport implements SessionAware {
 	private Map<String, Object> session;
-	private String username = null, password = null;
+	private String ccs = null, password = null;
 
 	@Override
 	public String execute() {
 		// any username is accepted without confirmation (should check using RMI)
-		if(this.username != null && username.equals("admin") && this.password != null && password.equals("admin")) {
-			this.getHeyBean().setUsername(this.username);
+		if(this.ccs != null && ccs.equals("admin") && this.password != null && password.equals("admin")) {
+			this.getHeyBean().setUsername(this.ccs);
 			this.getHeyBean().setPassword(this.password);
 			return "admin";
 		}
-		else if(this.username != null && this.password != null ) {
-			this.getHeyBean().setUsername(this.username);
-			return "success";
+		else if(this.ccs != null && this.password != null ) {
+			try{
+				int cc = Integer.parseInt(ccs);
+				return this.getHeyBean().checkValidUser(cc, password);
+			}
+			catch (Exception e){
+				return "failure";
+			}
 		}
 		else
 			return "failure";
 	}
-	
-	public void setUsername(String username) {
-		this.username = username; // will you sanitize this input? maybe use a prepared statement?
+
+	public void setCcs(String ccs) {
+		this.ccs = ccs;
 	}
 
 	public void setPassword(String password) {

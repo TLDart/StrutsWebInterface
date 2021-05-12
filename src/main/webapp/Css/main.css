@@ -5,3 +5,9 @@
     padding: 12px 12px 12px 0;
     display: inline-block;
 }
+.centered {
+    display: block;
+    margin-left: 100px;
+    margin-right: auto;
+    width: 50%;
+}
