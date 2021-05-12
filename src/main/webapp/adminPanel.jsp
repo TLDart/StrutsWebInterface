@@ -43,11 +43,11 @@
     <s:submit type="button" value="Show Realtime Data" cssClass="waves-effect waves-light btn-large"/>
 </s:form>
 <br>
-<s:form action="reg" cssClass="centerButtons">
+<s:form action="goToAddTable" cssClass="centerButtons">
     <s:submit type="button" value="Add a Table to an Election" cssClass="waves-effect waves-light btn-large"/>
 </s:form>
 <br>
-<s:form action="reg" cssClass="centerButtons">
+<s:form action="goToRemoveTable" cssClass="centerButtons">
     <s:submit type="button" value="Remove a Table from an Election" cssClass="waves-effect waves-light btn-large"/>
 </s:form>
 <br>

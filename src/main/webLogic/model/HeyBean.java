@@ -3,6 +3,7 @@ package webLogic.model;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.net.MalformedURLException;
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -126,5 +127,16 @@ public class HeyBean {
 
 	public ArrayList<String> getElectionList() {
 		return this.electionsList;
+	}
+
+	public String updateTable(String name, long uid, int mode) {
+		try{
+			this.rmiSv.updateTables(name, uid, mode);
+			return "success";
+		}
+		catch (RemoteException e){
+			e.printStackTrace();
+			return "failure";
+		}
 	}
 }
