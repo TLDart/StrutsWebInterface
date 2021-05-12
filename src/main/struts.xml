@@ -51,6 +51,12 @@ and should reside on the classpath of the webapp (generally /WEB-INF/classes). -
         <action name="goToRemoveTable">
             <result>/removeTable.jsp</result>
         </action>
+        <action name="goToUpdateElection">
+            <result>/updateElection.jsp</result>
+        </action>
+        <action name="goToFinishedElectionData">
+            <result>/finishedElectionData.jsp</result>
+        </action>
         <action name="login" class="webLogic.action.LoginAction" method="execute">
             <result name="admin">/adminPanel.jsp</result>
             <result name="user">/voter.jsp</result>
@@ -61,6 +67,10 @@ and should reside on the classpath of the webapp (generally /WEB-INF/classes). -
             <result name="failure">/failure.jsp</result>
         </action>
         <action name="createElection" class="webLogic.action.createElectionAction" method="execute">
+            <result name="success">/adminPanel.jsp</result>
+            <result name="failure">/failure.jsp</result>
+        </action>
+        <action name="updateElection" class="webLogic.action.updateElectionAction" method="execute">
             <result name="success">/adminPanel.jsp</result>
             <result name="failure">/failure.jsp</result>
         </action>
@@ -83,6 +93,10 @@ and should reside on the classpath of the webapp (generally /WEB-INF/classes). -
         <action name="showElectionList" class="webLogic.action.getElectionListAction" method="execute">
             <result name="success">/displayElectionList.jsp</result>
             <result name="Error">/error.jsp</result>
+        </action>
+        <action name="showFinishedData" class="webLogic.action.showElectionData" method="execute">
+            <result name="success">/displayElectionData.jsp</result>
+            <result name="failure">/failure.jsp</result>
         </action>
     </package>
 

@@ -21,6 +21,7 @@ public class HeyBean {
 	 ArrayList<String> userList = null;
 	ArrayList<String> electionsList = null;
 	TerminalInfo userInfo = null;
+	String electionDataMessage = null;
 
 	public HeyBean() {
 		try {
@@ -139,4 +140,36 @@ public class HeyBean {
 			return "failure";
 		}
 	}
+
+	public String updateElection(long uid, Calendar stTime, Calendar endTime, String description, String title, String department) {
+		try{
+			this.rmiSv.updateElection(uid, stTime, endTime, description, title, department);
+			return "success";
+		}
+		catch (RemoteException e){
+			e.printStackTrace();
+			return "failure";
+		}
+
+	}
+
+	public String showFinishedElectionData(long uid){
+		try{
+			this.electionDataMessage =this.rmiSv.finishedElectionData(uid);
+			if(this.electionDataMessage.equals("")){
+				this.electionDataMessage = "Invalid election's uid or the election hasn't ended yet.";
+			}
+			System.out.println(this.electionDataMessage);
+			return "success";
+		}
+		catch (RemoteException e){
+			e.printStackTrace();
+			return "failure";
+		}
+	}
+
+	public String getElectionDataMessage() {
+		return this.electionDataMessage;
+	}
+
 }

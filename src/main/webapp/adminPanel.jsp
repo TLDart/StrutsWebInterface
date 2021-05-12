@@ -31,11 +31,11 @@
     <s:submit type="button" value="Show Election List" cssClass="waves-effect waves-light btn-large"/>
 </s:form>
 <br>
-<s:form action="redirectUserList" cssClass="centerButtons">
+<s:form action="goToUpdateElection" cssClass="centerButtons">
 <s:submit type="button" value="Update Election" cssClass="waves-effect waves-light btn-large"/>
 </s:form>
 <br>
-<s:form action="redirectUserList" cssClass="centerButtons">
+<s:form action="goToFinishedElectionData" cssClass="centerButtons">
     <s:submit type="button" value="Show Finished Election Data" cssClass="waves-effect waves-light btn-large"/>
 </s:form>
 <br>
