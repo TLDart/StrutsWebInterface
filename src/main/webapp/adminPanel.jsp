@@ -19,15 +19,15 @@
     <s:submit type="button" value="Create An Election" cssClass="waves-effect waves-light btn-large"/>
 </s:form>
 <br>
-<s:form action="reg" cssClass="centerButtons">
+<s:form action="goToCreateVotingList" cssClass="centerButtons">
     <s:submit type="button" value="Create a Voting List" cssClass="waves-effect waves-light btn-large"/>
 </s:form>
 <br>
-<s:form action="redirectUserList" cssClass="centerButtons">
+<s:form action="goToUserList" cssClass="centerButtons">
     <s:submit type="button" value="Show User List" cssClass="waves-effect waves-light btn-large"/>
 </s:form>
 <br>
-<s:form action="redirectElectionList" cssClass="centerButtons">
+<s:form action="goToElectionList" cssClass="centerButtons">
     <s:submit type="button" value="Show Election List" cssClass="waves-effect waves-light btn-large"/>
 </s:form>
 <br>

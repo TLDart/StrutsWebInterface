@@ -36,10 +36,13 @@ and should reside on the classpath of the webapp (generally /WEB-INF/classes). -
         <action name="goToCreateElection">
             <result>/createElection.jsp</result>
         </action>
-        <action name="redirectUserList">
+        <action name="goToUserList">
             <result>/UserList.jsp</result>
         </action>
-        <action name="redirectElectionList">
+        <action name="goToCreateVotingList">
+            <result>/createVotingList.jsp</result>
+        </action>
+        <action name="goToElectionList">
             <result>/ElectionList.jsp</result>
         </action>
         <action name="login" class="webLogic.action.LoginAction" method="execute">
@@ -52,6 +55,10 @@ and should reside on the classpath of the webapp (generally /WEB-INF/classes). -
             <result name="failure">/failure.jsp</result>
         </action>
         <action name="createElection" class="webLogic.action.createElectionAction" method="execute">
+            <result name="success">/adminPanel.jsp</result>
+            <result name="failure">/failure.jsp</result>
+        </action>
+        <action name="createVotingList" class="webLogic.action.createVotingListAction" method="execute">
             <result name="success">/adminPanel.jsp</result>
             <result name="failure">/failure.jsp</result>
         </action>

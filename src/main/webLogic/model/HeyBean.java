@@ -91,6 +91,24 @@ public class HeyBean {
 		}
 		return "success";
 	}
+
+	public String createVotingList(long electionId, String name, int type, CopyOnWriteArrayList<String> members){
+	    String response;
+	    try{
+			response = this.rmiSv.createVotingList(electionId, name, type, members);
+			if (response.equals(""))
+				return "sucess";
+			else {
+				System.out.println(response);// dizer o que esta errado
+				return "failure";
+			}
+
+		}
+	    catch (RemoteException e){
+			System.out.println("Something went Wrong");
+			return "failure";
+		}
+	}
 	public String createElection(Calendar stTime, Calendar endTime, String description, String title, String department, int type, CopyOnWriteArrayList<VotingListInfo> validDeps){
 		try{
 			this.rmiSv.createElection(stTime, endTime, description, title, department, type,
