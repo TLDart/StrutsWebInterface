@@ -51,5 +51,9 @@
     <s:submit type="button" value="Remove a Table from an Election" cssClass="waves-effect waves-light btn-large"/>
 </s:form>
 <br>
+<s:form action="showElection" cssClass="centerButtons">
+    <s:submit type="button" value="Show Election Data" cssClass="waves-effect waves-light btn-large"/>
+</s:form>
+<br>
 </body>
 </html>

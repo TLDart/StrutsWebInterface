@@ -12,6 +12,7 @@ and should reside on the classpath of the webapp (generally /WEB-INF/classes). -
     <!-- devMode equals debug information and reload everything for every request -->
     <constant name="struts.devMode" value="true"/>
     <constant name="struts.ui.theme" value="simple"/>
+    <constant name="struts.action.excludePattern" value="/rtd"/>
 
     <package name="webLogic" extends="struts-default">
 
@@ -97,6 +98,9 @@ and should reside on the classpath of the webapp (generally /WEB-INF/classes). -
         <action name="showFinishedData" class="webLogic.action.showElectionData" method="execute">
             <result name="success">/displayElectionData.jsp</result>
             <result name="failure">/failure.jsp</result>
+        </action>
+        <action name = "showElection">
+            <result>/showElection.html</result>
         </action>
     </package>
 

@@ -192,4 +192,18 @@ public class HeyBean {
         return list;
     }
 
+    public String showElection(long uid){
+        try {
+            this.electionDataMessage = this.rmiSv.electionData(uid);
+            if (this.electionDataMessage.equals("")) {
+                this.electionDataMessage = "Invalid election's uid or the election hasn't ended yet.";
+            }
+            System.out.println(this.electionDataMessage);
+            return "success";
+        } catch (RemoteException e) {
+            e.printStackTrace();
+            return "failure";
+        }
+    }
+
 }
