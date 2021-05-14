@@ -10,13 +10,13 @@
 </head>
 <body>
 <jsp:useBean id="HeyBean" scope="request" type="webLogic.model.HeyBean"/>
-    <c:forEach items="${HeyBean.validElections}" var="value">
+    <c:forEach items="${HeyBean.lists}" var="value">
         <c:out value="${value}" />
         <br>
     </c:forEach>
 
     <s:form action="vote" method="post">
-        <s:text  name="Select an Election:"  />
+        <s:text  name="Select which Election To vote In"  />
         <s:textfield name="uidS"/><br>
         <s:submit  cssClass="waves-effect waves-light btn-large"/>
     </s:form>
