@@ -13,7 +13,7 @@
     </style>
 </head>
 <body>
-<h1 style="text-align: center">There was an error while setting realizing this action</h1>
+<h1 style="text-align: center">There was an error while realizing this action</h1>
 <p style="text-align: center">This was not a control Error, it just means that somewhere you have input some valid
     parameters. Please check and try again</p>
 <img style="width:50%;" src="img/F.gif" alt="RIP">

@@ -23,6 +23,7 @@ public class HeyBean {
     ArrayList<String> electionsList = null;
     TerminalInfo userInfo = null;
     String electionDataMessage = null;
+    private int electionToVote = -1;
 
     public HeyBean() {
         try {
@@ -178,18 +179,59 @@ public class HeyBean {
         }
         catch (Exception e){
             e.printStackTrace();
-            System.out.println("jkaslhdaksljh");
             return "serverDown";
         }
     }
     public ArrayList<String> getValidElections(){
         ArrayList<String> list = new ArrayList<>();
+        int i = 0;
         for(Election e: this.userInfo.getValidElections()){
             System.out.println( e.getTitle());
-            list.add(e.getUid() + " "  +e.getTitle());
+            list.add(i + " "  +e.getTitle());
+            i++;
         }
         System.out.println(list);
         return list;
     }
 
+    public String setElectionToVote(int option) {
+        if(option < 0 || option > this.userInfo.getValidElections().size()){
+            return "failure";
+        }
+        else{
+            this.electionToVote = option;
+        }
+        return "success";
+    }
+
+    public long getElectionToVote() {
+        return electionToVote;
+    }
+
+    public ArrayList<String> getLists() {
+        ArrayList<String> list = new ArrayList<>();
+        int i = 0;
+        for (VotingList v : this.userInfo.getValidElections()
+                .get(this.electionToVote).getLists()) {
+            list.add(i + " " + v.getName());
+            System.out.println(i + " " + v.getName());
+            i++;
+        }
+        return list;
+    }
+
+    public String vote(int option){
+        if(option < 0 || option > this.userInfo.getValidElections().get(this.electionToVote).getLists().size()){
+            return "failure";
+        }
+        this.userInfo.setV(new Vote(this.electionToVote,"WEB",this.userInfo.getValidElections().get(this.electionToVote).getLists().get(option).getName() ,Calendar.getInstance()));
+        try{
+             this.rmiSv.processVote(this.userInfo);
+             return "success";
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return "serverDown";
+        }
+    }
 }
