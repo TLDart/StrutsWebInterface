@@ -20,15 +20,15 @@ public class Vote implements Serializable{
     private Calendar voteTime;
     private long electionUid;
 
-     /**
-      * Instantiates the vote
-      * @param electionUid UId of the Election of this vote
-      * @param votingTable Table where this vote was made
-      * @param listName Name of the list this vote as voted in
-      * @param voteTime Time the vote was casted
-      */
-     public Vote(long electionUid, String votingTable, String listName, Calendar voteTime){
-        this.votingTable = votingTable; 
+    /**
+     * Instantiates the vote
+     * @param electionUid UId of the Election of this vote
+     * @param votingTable Table where this vote was made
+     * @param listName Name of the list this vote as voted in
+     * @param voteTime Time the vote was casted
+     */
+    public Vote(long electionUid, String votingTable, String listName, Calendar voteTime){
+        this.votingTable = votingTable;
         this.listName = listName;
         this.voteTime = voteTime;
         this.electionUid = electionUid;
@@ -48,5 +48,5 @@ public class Vote implements Serializable{
         return this.votingTable;
     }
 
-    
+
 }

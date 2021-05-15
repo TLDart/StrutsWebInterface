@@ -36,10 +36,10 @@ public class createElectionAction extends ActionSupport implements SessionAware 
                         Integer.parseInt(date_fields[4]));
                 System.out.println(stTime.getTime());
                 System.out.println(endTime.getTime());
-                if (stTime.before(Calendar.getInstance())){
+                /*if (stTime.before(Calendar.getInstance())){
                     System.out.println("This nuts");
                     return "failure";
-                }
+                }*/
                 if (stTime != null && endTime != null) {
                     if (endTime.before(stTime)) {
                         System.out.println("asd");

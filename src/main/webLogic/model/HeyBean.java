@@ -238,7 +238,13 @@ public class HeyBean {
         if(option < 0 || option > this.userInfo.getValidElections().get(this.electionToVote).getLists().size()){
             return "failure";
         }
-        this.userInfo.setV(new Vote(this.electionToVote,"WEB",this.userInfo.getValidElections().get(this.electionToVote).getLists().get(option).getName() ,Calendar.getInstance()));
+        Election selected = this.userInfo.getValidElections().get(this.electionToVote);
+        System.out.println("her");
+        System.out.println(this.userInfo.getValidElections().get(this.electionToVote).getLists().get(option).getName());
+        System.out.println(this.userInfo.getValidElections().get(this.electionToVote).getLists());
+        System.out.println(option);
+        System.out.println(this.userInfo.getValidElections().get(this.electionToVote).getUid());
+        this.userInfo.setV(new Vote(this.userInfo.getValidElections().get(this.electionToVote).getUid(),"WEB",this.userInfo.getValidElections().get(this.electionToVote).getLists().get(option).getName() ,Calendar.getInstance()));
         try{
              this.rmiSv.processVote(this.userInfo);
              return "success";
@@ -247,5 +253,10 @@ public class HeyBean {
             e.printStackTrace();
             return "serverDown";
         }
+    }
+
+    public boolean getValidElectionsSize() {
+        System.out.println(this.getValidElections().size() > 0);
+        return this.getValidElections().size() > 0;
     }
 }
