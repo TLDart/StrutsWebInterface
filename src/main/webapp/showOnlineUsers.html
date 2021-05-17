@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <title>RealTimeData</title>
+    <link rel="stylesheet" type="text/css" href="Css/style.css">
+  <script type="text/javascript">
+
+    var websocket = null;
+    var messageNumber = 0;
+
+    window.onload = function() { // URI = ws://10.16.0.165:8080/WebSocket/ws
+      connect('ws://' + window.location.host + '/tp2_war_exploded/rtd/0');
+    }
+
+    function connect(host) { // connect to the host websocket
+      if ('WebSocket' in window) {
+        console.log(host);
+        websocket = new WebSocket(host);
+      }
+      else if ('MozWebSocket' in window)
+        websocket = new MozWebSocket(host);
+      else {
+        writeToHistory('Get a real browser which supports WebSocket.');
+        return;
+      }
+
+      //websocket.onopen    = onOpen; // set the 4 event listeners below
+      websocket.onclose   = onClose;
+      websocket.onmessage = onMessage;
+      websocket.onerror   = onError;
+    }
+
+    //function onOpen(event) {
+      //writeToHistory('Connected to ' + window.location.host + '.');
+      //document.getElementById('electionId').onkeydown = function(key) {
+        //if (key.keyCode == 13)
+          //doSend(); // call doSend() on enter key press
+      //};
+    //}
+
+    function onClose(event) {
+      writeToHistory('WebSocket closed (code ' + event.code + ').');
+    }
+
+    function onMessage(message) { // print the received message
+      writeToHistory(message.data);
+    }
+
+    function onError(event) {
+      writeToHistory('WebSocket error.');
+      document.getElementById('electionId').onkeydown = null;
+    }
+
+    function writeToHistory(text) {
+        var history = document.getElementById('history');
+        var line = document.createElement('p');
+        line.style.wordWrap = 'break-word';
+        line.innerHTML = text;
+        history.appendChild(line);
+        history.scrollTop = history.scrollHeight;
+    }
+
+  </script>
+</head>
+<body>
+<div>
+    <noscript>Online users list.</noscript>
+    <div id="container"><div id="history"></div></div>
+</div>
+</body>
+</html>

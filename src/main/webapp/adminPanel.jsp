@@ -55,5 +55,10 @@
     <s:submit type="button" value="Show Election Data" cssClass="waves-effect waves-light btn-large"/>
 </s:form>
 <br>
+<br>
+<s:form action="showOnlineUsers" cssClass="centerButtons">
+    <s:submit type="button" value="Show online users" cssClass="waves-effect waves-light btn-large"/>
+</s:form>
+<br>
 </body>
 </html>

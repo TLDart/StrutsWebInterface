@@ -11,8 +11,8 @@
     var messageNumber = 0;
 
     window.onload = function() { // URI = ws://10.16.0.165:8080/WebSocket/ws
-      connect('ws://' + window.location.host + '/tp2_war_exploded/rtd');
-      //document.getElementById("electionId").focus();
+      connect('ws://' + window.location.host + '/tp2_war_exploded/rtd/1');
+      document.getElementById("electionId").focus();
     }
 
     function connect(host) { // connect to the host websocket
