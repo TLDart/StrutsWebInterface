@@ -11,6 +11,10 @@ import java.util.Calendar;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import OnlineVoter.*;
+import com.github.scribejava.core.builder.ServiceBuilder;
+import com.github.scribejava.core.model.*;
+import com.github.scribejava.core.oauth.OAuthService;
+import uc.sd.apis.FacebookApi2;
 
 public class HeyBean {
     final String svIP = "localhost";
@@ -25,7 +29,15 @@ public class HeyBean {
     String electionDataMessage = null;
     private int electionToVote = -1;
 
+    private Token EMPTY_TOKEN = null;
+    private String authorizationUrl;
+    private String loginFacebookUrl;
+    private OAuthService service;
+    private OAuthService serviceLogin;
+    private static final String PROTECTED_RESOURCE_URL = "https://graph.facebook.com/me";
+
     public HeyBean() {
+        this.createServicesAndLinks();
         try {
             System.out.printf("//%s:%d/%s%n", this.svIP, this.svPort, this.svName);
             this.rmiSv = (RMIServerInterface) Naming
@@ -33,6 +45,31 @@ public class HeyBean {
         } catch (NotBoundException | MalformedURLException | RemoteException e) {
             e.printStackTrace(); // what happens *after* we reach this line?
         }
+    }
+
+    private void createServicesAndLinks(){
+        String apiKey = "187811769882816";
+        String apiSecret = "83c70e0ae4c30a49ce23da6bf464d90e";
+        //link para associar a conta de facebook
+        this.service =  new ServiceBuilder()
+                .provider(FacebookApi2.class)
+                .apiKey(apiKey)
+                .apiSecret(apiSecret)
+                .callback("http://localhost:8080/tp2_war_exploded/associateFacebook") // Do not change this.
+                .scope("public_profile")
+                .build();
+
+        this.authorizationUrl = service.getAuthorizationUrl(EMPTY_TOKEN);
+
+        //link para login com o facebook
+        this.serviceLogin = new ServiceBuilder()
+                .provider(FacebookApi2.class)
+                .apiKey(apiKey)
+                .apiSecret(apiSecret)
+                .callback("http://localhost:8080/tp2_war_exploded/loginWithFacebook") // Do not change this.
+                .scope("public_profile")
+                .build();
+        this.loginFacebookUrl = this.serviceLogin.getAuthorizationUrl(EMPTY_TOKEN);
     }
 
     public void setUsername(String username) {
@@ -258,5 +295,60 @@ public class HeyBean {
     public boolean getValidElectionsSize() {
         System.out.println(this.getValidElections().size() > 0);
         return this.getValidElections().size() > 0;
+    }
+
+    public OAuthService getService(){
+        return this.service;
+    }
+
+    public OAuthService getServiceLogin(){
+        return this.serviceLogin;
+    }
+
+    public String getAuthorizationUrl() {
+        return authorizationUrl;
+    }
+
+    public String getLoginFacebookUrl(){
+        return this.loginFacebookUrl;
+    }
+
+    public String getFacebookId(String code, int type){
+        OAuthService service = null;
+        //usar o service de login
+        if (type == 0) service = this.serviceLogin;
+        //usar o service de associacao de facebook
+        else if(type == 1) service = this.service;
+        Verifier verifier = new Verifier(code);
+        Token accessToken = service.getAccessToken(EMPTY_TOKEN, verifier);
+        OAuthRequest request = new OAuthRequest(Verb.GET, PROTECTED_RESOURCE_URL, service);
+        service.signRequest(accessToken, request);
+        Response response = request.send();
+        String str = response.getBody();
+        str = str.replace("\"", "").replace("{", "").replace("}", "");
+        String [] pieces = str.split("[:,]");
+        String facebookId = pieces[3];
+        return facebookId;
+    }
+
+    public void saveFacebookId(String facebookId){
+        try{
+            int cc = Integer.parseInt(this.username);
+            this.rmiSv.saveFacebookId(cc,  facebookId);
+        }catch (RemoteException e){
+            System.out.println("Erro a guardar o facebookID.");
+        }catch (NumberFormatException e){
+            System.out.println("Erro a dar parse da string do cc do user.");
+        }
+    }
+
+    public boolean verifyFacebookLogin(String facebookId){
+        try {
+            this.userInfo = this.rmiSv.verifyFacebookLogin(facebookId);
+            return this.userInfo != null;
+        }catch(RemoteException e){
+            //nao consegue conectar a base de dados, da erro no login
+            return false;
+        }
     }
 }

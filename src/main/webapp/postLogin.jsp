@@ -31,5 +31,7 @@
     </c:otherwise>
 
 </c:choose>
+<br><br>
+<a href=${HeyBean.authorizationUrl}>Associate Facebook account</a>
 </body>
 </html>

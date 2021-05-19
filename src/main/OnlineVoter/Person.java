@@ -3,7 +3,7 @@ import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-
+import java.util.concurrent.CopyOnWriteArrayList;
 /**
  * Defines the notion of Person to the System. This person has the following attributes:
  * <ol>
@@ -30,6 +30,7 @@ public class Person implements Serializable{
     private Calendar ccValidity;
     private int type;
     private ArrayList<Vote> votedElections;
+    private String facebookId;
 
     /**
      * Instanciates the Person class
@@ -38,26 +39,26 @@ public class Person implements Serializable{
      * @param dep Departament of the user
      * @param address Address of the User
      * @param phoneNumber Phone Number of the user
-     * @param ccNr CC of the user 
+     * @param ccNr CC of the user
      * @param type Type of the user
      * @param ccValidity Validity of the CC
      */
     public Person(String name, String password, String dep, String address, int phoneNumber, int ccNr, int type, Calendar ccValidity){
-       super();
-       this.name = name;
-       this.password = password;
-       this.dep = dep;
-       this.address = address;
-       this.phoneNumber = phoneNumber;
-       this.ccNr = ccNr;
-       this.ccValidity = ccValidity;
-       this.type = type;
-       this.votedElections = new ArrayList<>();
-   }
-   Person(String s){
+        super();
+        this.name = name;
+        this.password = password;
+        this.dep = dep;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+        this.ccNr = ccNr;
+        this.ccValidity = ccValidity;
+        this.type = type;
+        this.votedElections = new ArrayList<>();
+    }
+    Person(String s){
         super();
         System.out.println("receiving data");
-   } 
+    }
     public long getUid() {
         return this.uid;
     }
@@ -130,8 +131,8 @@ public class Person implements Serializable{
         this.ccValidity = ccValidity;
     }
 
-    
-    /** 
+
+    /**
      * Checks if the user has voted in the election e, by comparing all the voted he has made to the current Election Uid
      * @param e Election Object in search
      * @return Boolean True if not voted , false if voted
@@ -143,8 +144,8 @@ public class Person implements Serializable{
         }
         return true;
     }
-    
-    /** 
+
+    /**
      * Adds a vote to the current Person voting list (to prevent double voting)
      * The list to which the user has voted is censured for privacy reasons
      * @param v vote to be added
@@ -157,8 +158,15 @@ public class Person implements Serializable{
     public ArrayList<Vote> getVotedElections(){
         return this.votedElections;
     }
-    
-    /** 
+
+    public void setFacebookId(String facebookId){
+        this.facebookId = facebookId;
+    }
+
+    public String getFacebookId(){
+        return this.facebookId;
+    }
+    /**
      * Prints the user information in string format
      * @return String with user information
      */
@@ -168,6 +176,6 @@ public class Person implements Serializable{
         if (this.type == 0) type_str = "Student";
         else if (this.type == 1) type_str = "Teacher";
         else if (this.type == 2) type_str = "Staff";
-        return String.format("Uid: %d | Name: %s | Department: %s | Address: %s | Phone number: %d | Type: %s | ccNr: %d | ccValidity: %s | password: %s", this.uid, this.name, this.dep, this.address, this.phoneNumber, type_str, this.ccNr, sdf.format(this.ccValidity.getTime()), this.password);
+        return String.format("Uid: %d | Name: %s | Department: %s | Address: %s | Phone number: %d | Type: %s | ccNr: %d | ccValidity: %s | password: %s | facebookId: %s", this.uid, this.name, this.dep, this.address, this.phoneNumber, type_str, this.ccNr, sdf.format(this.ccValidity.getTime()), this.password, this.facebookId);
     }
 }

@@ -1,11 +1,10 @@
-/**
- * Raul Barbosa 2014-11-07
- */
 package webLogic.action;
 
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.interceptor.SessionAware;
 import java.util.Map;
+
+import uc.sd.apis.FacebookApi2;
 import webLogic.model.HeyBean;
 
 public class LoginAction extends ActionSupport implements SessionAware {
@@ -22,6 +21,8 @@ public class LoginAction extends ActionSupport implements SessionAware {
 		}
 		else if(this.ccs != null && this.password != null ) {
 			try{
+				this.getHeyBean().setUsername(this.ccs);
+				this.getHeyBean().setPassword(this.password);
 				int cc = Integer.parseInt(ccs);
 				return this.getHeyBean().checkValidUser(cc, password);
 			}
@@ -55,4 +56,5 @@ public class LoginAction extends ActionSupport implements SessionAware {
 	public void setSession(Map<String, Object> session) {
 		this.session = session;
 	}
+
 }

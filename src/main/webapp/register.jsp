@@ -26,7 +26,7 @@
     <s:text name="Role:" />
     <s:textfield name="role" placeholder="(0 - student, 1 - teacher, 2 - staff)" /><br>
     <s:text name="CC Validity:" />
-    <s:textfield name="ccVal" placeholder="dd/MM/yyyy"/>
+    <s:textfield name="ccVal" placeholder="yyyy/MM/dd"/>
     <s:submit  cssClass="waves-effect waves-light btn-large"/>
 </s:form>
 </body>

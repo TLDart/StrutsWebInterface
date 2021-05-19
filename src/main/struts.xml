@@ -113,6 +113,13 @@ and should reside on the classpath of the webapp (generally /WEB-INF/classes). -
         <action name="showOnlineUsers">
             <result>/showOnlineUsers.html</result>
         </action>
+        <action name = "associateFacebook" class = "webLogic.action.AssociateFacebookAction" method = "execute">
+            <result name = "success">/postLogin.jsp</result>
+        </action>
+        <action name = "loginWithFacebook" class="webLogic.action.LoginWithFacebookAction" method = "execute">
+            <result name = "success">/postLogin.jsp</result>
+            <result name = "failure">/index.jsp</result>
+        </action>
     </package>
 
 </struts>
