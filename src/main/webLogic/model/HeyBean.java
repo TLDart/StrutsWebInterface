@@ -207,6 +207,9 @@ public class HeyBean {
     public String checkValidUser(int cc, String password) {
         try{
             this.userInfo = this.rmiSv.getPersonInfoWeb(cc, password);
+            if(this.userInfo.getP().getCcNr() != cc || !this.userInfo.getP().getPassword().equals(password)){
+                return "failure";
+            }
             if(this.userInfo.getP() != null){
                 return "user";
             }

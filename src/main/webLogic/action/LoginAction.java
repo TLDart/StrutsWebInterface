@@ -14,9 +14,13 @@ public class LoginAction extends ActionSupport implements SessionAware {
 	@Override
 	public String execute() {
 		// any username is accepted without confirmation (should check using RMI)
+		this.session.put("login", false);
+		this.session.put("admin", false);
 		if(this.ccs != null && ccs.equals("admin") && this.password != null && password.equals("admin")) {
 			this.getHeyBean().setUsername(this.ccs);
 			this.getHeyBean().setPassword(this.password);
+			session.put("admin", true);
+			System.out.println("iN admin");
 			return "admin";
 		}
 		else if(this.ccs != null && this.password != null ) {
@@ -24,7 +28,8 @@ public class LoginAction extends ActionSupport implements SessionAware {
 				this.getHeyBean().setUsername(this.ccs);
 				this.getHeyBean().setPassword(this.password);
 				int cc = Integer.parseInt(ccs);
-				return this.getHeyBean().checkValidUser(cc, password);
+				this.session.put("login", true);
+				return this.getHeyBean().checkValidUser(cc, this.password);
 			}
 			catch (Exception e){
 				return "failure";

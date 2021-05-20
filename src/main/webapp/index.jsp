@@ -1,5 +1,6 @@
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c' %>
 <%@ taglib prefix="s" uri="/struts-tags"%>
+<%@ taglib prefix="my" uri="/struts-tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -9,6 +10,7 @@
 <body>
 
 <h1>Please Login to Continue</h1>
+<jsp:useBean id="HeyBean" scope="session" class="webLogic.model.HeyBean"/>
 <s:form action="login" method="post">
     <s:text  name="CC :"  />
     <s:textfield name="ccs"/><br>
@@ -16,9 +18,9 @@
     <s:textfield name="password" /><br>
     <s:submit  cssClass="waves-effect waves-light btn-large"/>
 </s:form>
-
-<br><br>
-<jsp:useBean id="HeyBean" scope="session" class="webLogic.model.HeyBean"/>
-<a href = ${HeyBean.loginFacebookUrl}>Login with Facebook</a>
+    <a href = ${HeyBean.loginFacebookUrl}>
+        <button class="waves-effect waves-light btn-large">
+            Login with Facebook
+        </button></a>
 </body>
 </html>
