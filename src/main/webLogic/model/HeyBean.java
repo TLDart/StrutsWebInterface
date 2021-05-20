@@ -207,11 +207,13 @@ public class HeyBean {
     public String checkValidUser(int cc, String password) {
         try{
             this.userInfo = this.rmiSv.getPersonInfoWeb(cc, password);
-            if(this.userInfo.getP().getCcNr() != cc || !this.userInfo.getP().getPassword().equals(password)){
-                return "failure";
-            }
             if(this.userInfo.getP() != null){
-                return "user";
+                if(this.userInfo.getP().getCcNr() != cc || !this.userInfo.getP().getPassword().equals(password)){
+                    return "failure";
+                }
+                else{
+                    return "user";
+                }
             }
             else{
                 return "failure";
@@ -285,6 +287,9 @@ public class HeyBean {
         System.out.println(option);
         System.out.println(this.userInfo.getValidElections().get(this.electionToVote).getUid());
         this.userInfo.setV(new Vote(this.userInfo.getValidElections().get(this.electionToVote).getUid(),"WEB",this.userInfo.getValidElections().get(this.electionToVote).getLists().get(option).getName() ,Calendar.getInstance()));
+        System.out.println(this.userInfo.getV().getElectionUid());
+        System.out.println(this.userInfo.getV().getListName());
+        System.out.println(this.userInfo.getV().getVotingTable());
         try{
              this.rmiSv.processVote(this.userInfo);
              return "success";

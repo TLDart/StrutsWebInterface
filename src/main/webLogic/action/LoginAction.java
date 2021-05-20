@@ -29,7 +29,7 @@ public class LoginAction extends ActionSupport implements SessionAware {
 				this.getHeyBean().setPassword(this.password);
 				int cc = Integer.parseInt(ccs);
 				this.session.put("login", true);
-				return this.getHeyBean().checkValidUser(cc, this.password);
+				return this.getHeyBean().checkValidUser(cc, password);
 			}
 			catch (Exception e){
 				return "failure";

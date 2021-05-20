@@ -107,7 +107,7 @@ and should reside on the classpath of the webapp (generally /WEB-INF/classes). -
             <result name="failure">/failure.jsp</result>
         </action>
         <action name="vote" class="webLogic.action.voteAction" method="execute">
-            <result name="success">/adminPanel.jsp</result>
+            <result name="success">/index.jsp</result>
             <result name="failure">/failure.jsp</result>
         </action>
         <action name="showOnlineUsers">
