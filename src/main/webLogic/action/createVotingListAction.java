@@ -77,5 +77,4 @@ public class createVotingListAction extends ActionSupport implements SessionAwar
     public void setSession(Map<String, Object> session) {
         this.session = session;
     }
-
 }

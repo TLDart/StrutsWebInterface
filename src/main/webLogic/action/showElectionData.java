@@ -4,7 +4,6 @@ import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.interceptor.SessionAware;
 import webLogic.model.HeyBean;
 
-import java.util.ArrayList;
 import java.util.Map;
 
 public class showElectionData extends ActionSupport implements SessionAware {
@@ -50,5 +49,4 @@ public class showElectionData extends ActionSupport implements SessionAware {
     public void setSession(Map<String, Object> session) {
         this.session = session;
     }
-
 }

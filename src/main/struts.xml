@@ -15,7 +15,10 @@ and should reside on the classpath of the webapp (generally /WEB-INF/classes). -
     <constant name="struts.action.excludePattern" value="/rtd/.*"/>
 
     <package name="webLogic" extends="struts-default">
-
+        <interceptors>
+            <interceptor name="LoginInt" class="webLogic.security.LoginInterceptor"/>
+        </interceptors>
+        
         <default-action-ref name="index"/>
 
         <global-results>
@@ -58,67 +61,107 @@ and should reside on the classpath of the webapp (generally /WEB-INF/classes). -
         <action name="goToFinishedElectionData">
             <result>/finishedElectionData.jsp</result>
         </action>
+
         <action name="login" class="webLogic.action.LoginAction" method="execute">
             <result name="admin">/adminPanel.jsp</result>
             <result name="user">/postLogin.jsp</result>
             <result name="failure">/failure.jsp</result>
         </action>
         <action name="register" class="webLogic.action.RegisterAction" method="execute">
+            <interceptor-ref name="LoginInt"/>
+            <interceptor-ref name="defaultStack"/>
             <result name="success">/adminPanel.jsp</result>
             <result name="failure">/failure.jsp</result>
+            <result name="authError">/NoPermission.jsp</result>
         </action>
         <action name="createElection" class="webLogic.action.createElectionAction" method="execute">
+            <interceptor-ref name="LoginInt"/>
+            <interceptor-ref name="defaultStack"/>
             <result name="success">/adminPanel.jsp</result>
             <result name="failure">/failure.jsp</result>
+            <result name="authError">/NoPermission.jsp</result>
         </action>
         <action name="updateElection" class="webLogic.action.updateElectionAction" method="execute">
+            <interceptor-ref name="LoginInt"/>
+            <interceptor-ref name="defaultStack"/>
             <result name="success">/adminPanel.jsp</result>
             <result name="failure">/failure.jsp</result>
+            <result name="authError">/NoPermission.jsp</result>
         </action>
         <action name="createVotingList" class="webLogic.action.createVotingListAction" method="execute">
+            <interceptor-ref name="LoginInt"/>
+            <interceptor-ref name="defaultStack"/>
             <result name="success">/adminPanel.jsp</result>
             <result name="failure">/failure.jsp</result>
+            <result name="authError">/NoPermission.jsp</result>
         </action>
         <action name="removeTable" class="webLogic.action.removeTableAction" method="execute">
+            <interceptor-ref name="LoginInt"/>
+            <interceptor-ref name="defaultStack"/>
             <result name="success">/adminPanel.jsp</result>
             <result name="failure">/failure.jsp</result>
+            <result name="authError">/NoPermission.jsp</result>
         </action>
         <action name="addTable" class="webLogic.action.addTableAction" method="execute">
+            <interceptor-ref name="LoginInt"/>
+            <interceptor-ref name="defaultStack"/>
             <result name="success">/adminPanel.jsp</result>
             <result name="failure">/failure.jsp</result>
+            <result name="authError">/NoPermission.jsp</result>
         </action>
         <action name="showUserList" class="webLogic.action.getUserListAction" method="execute">
+            <interceptor-ref name="LoginInt"/>
+            <interceptor-ref name="defaultStack"/>
             <result name="success">/displayUserList.jsp</result>
             <result name="Error">/error.jsp</result>
+            <result name="authError">/NoPermission.jsp</result>
         </action>
         <action name="showElectionList" class="webLogic.action.getElectionListAction" method="execute">
+            <interceptor-ref name="LoginInt"/>
+            <interceptor-ref name="defaultStack"/>
             <result name="success">/displayElectionList.jsp</result>
             <result name="Error">/error.jsp</result>
+            <result name="authError">/NoPermission.jsp</result>
         </action>
         <action name="showFinishedData" class="webLogic.action.showElectionData" method="execute">
+            <interceptor-ref name="LoginInt"/>
+            <interceptor-ref name="defaultStack"/>
             <result name="success">/displayElectionData.jsp</result>
             <result name="failure">/failure.jsp</result>
+            <result name="authError">/NoPermission.jsp</result>
         </action>
-        <action name = "showElection">
+        <action name="showElection">
+            <interceptor-ref name="LoginInt"/>
+            <interceptor-ref name="defaultStack"/>
             <result>/showElection.html</result>
+            <result name="authError">/NoPermission.jsp</result>
         </action>
         <action name="selectList" class="webLogic.action.selectListAction" method="execute">
+            <interceptor-ref name="LoginInt"/>
+            <interceptor-ref name="defaultStack"/>
             <result name="success">/vote.jsp</result>
             <result name="failure">/failure.jsp</result>
+            <result name="authError">/NoPermission.jsp</result>
         </action>
         <action name="vote" class="webLogic.action.voteAction" method="execute">
+            <interceptor-ref name="LoginInt"/>
+            <interceptor-ref name="defaultStack"/>
             <result name="success">/index.jsp</result>
             <result name="failure">/failure.jsp</result>
+            <result name="authError">/NoPermission.jsp</result>
         </action>
         <action name="showOnlineUsers">
+            <interceptor-ref name="LoginInt"/>
+            <interceptor-ref name="defaultStack"/>
             <result>/showOnlineUsers.html</result>
+            <result name="authError">/NoPermission.jsp</result>
         </action>
-        <action name = "associateFacebook" class = "webLogic.action.AssociateFacebookAction" method = "execute">
-            <result name = "success">/postLogin.jsp</result>
+        <action name="associateFacebook" class="webLogic.action.AssociateFacebookAction" method="execute">
+            <result name="success">/postLogin.jsp</result>
         </action>
-        <action name = "loginWithFacebook" class="webLogic.action.LoginWithFacebookAction" method = "execute">
-            <result name = "success">/postLogin.jsp</result>
-            <result name = "failure">/index.jsp</result>
+        <action name="loginWithFacebook" class="webLogic.action.LoginWithFacebookAction" method="execute">
+            <result name="success">/postLogin.jsp</result>
+            <result name="failure">/index.jsp</result>
         </action>
     </package>
 
