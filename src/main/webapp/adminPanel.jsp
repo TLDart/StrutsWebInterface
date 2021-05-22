@@ -42,10 +42,6 @@
             <s:submit type="button" value="Show Finished Election Data" cssClass="waves-effect waves-light btn-large"/>
         </s:form>
         <br>
-        <s:form action="redirectUserList" cssClass="centerButtons">
-            <s:submit type="button" value="Show Realtime Data" cssClass="waves-effect waves-light btn-large"/>
-        </s:form>
-        <br>
         <s:form action="goToAddTable" cssClass="centerButtons">
             <s:submit type="button" value="Add a Table to an Election" cssClass="waves-effect waves-light btn-large"/>
         </s:form>

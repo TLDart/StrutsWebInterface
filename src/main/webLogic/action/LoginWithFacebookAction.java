@@ -17,10 +17,14 @@ public class LoginWithFacebookAction extends ActionSupport implements SessionAwa
     @Override
     public String execute(){
         String facebookId = this.getHeyBean().getFacebookId(this.code, 0);
-
+        System.out.printf("facebookId: %s\n", facebookId);
         //verificar se ha algum utilizador que tenha este id associado a sua conta
         boolean result = this.getHeyBean().verifyFacebookLogin(facebookId);
-        if (!result) return "failure";
+        if (!result){
+            this.session.put("login", false);
+            return "failure";
+        }
+        this.session.put("login", true);
         return "success";
     }
 
